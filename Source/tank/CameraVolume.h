@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TankPlayerCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Engine/TriggerVolume.h"
@@ -23,12 +24,31 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UCameraComponent* DebugCamera;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool FollowPlayer = false;
+	
+private:
+
+	UPROPERTY()
+	bool IsActive = false;
+
+	UPROPERTY()
+	ATankPlayerCharacter* TankPlayerCharacter = nullptr;
+	
+public:
+	
 	ACameraVolume();
 
 protected:
 	virtual void BeginPlay() override;
 
+public:
+	virtual void Tick(float DeltaSeconds) override;
+
 private:
 	UFUNCTION()
 	void OnBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
+
+	UFUNCTION()
+	void OnEndOverlap(AActor* OverlappedActor, AActor* OtherActor);
 };

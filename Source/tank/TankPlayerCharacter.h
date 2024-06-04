@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "TankPlayerCharacter.generated.h"
 
@@ -25,6 +26,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	UInputAction* YawAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UCameraComponent* CameraComponent;
 
 public:
 	// Sets default values for this character's properties

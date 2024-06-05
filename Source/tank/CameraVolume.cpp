@@ -10,7 +10,7 @@
 ACameraVolume::ACameraVolume()
 {
 	PrimaryActorTick.bCanEverTick = true;
-	
+
 	ArrowComponent = CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow Component"));
 	ArrowComponent->SetupAttachment(RootComponent);
 
@@ -23,7 +23,7 @@ void ACameraVolume::BeginPlay()
 {
 	Super::BeginPlay();
 	this->OnActorBeginOverlap.AddDynamic(this, &ACameraVolume::OnBeginOverlap);
-	this->OnActorEndOverlap.AddDynamic(this, &ACameraVolume::ACameraVolume::OnEndOverlap);
+	this->OnActorEndOverlap.AddDynamic(this, &ACameraVolume::OnEndOverlap);
 }
 
 void ACameraVolume::Tick(float DeltaSeconds)
@@ -62,7 +62,7 @@ void ACameraVolume::OnBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 	{
 		TankPlayerCharacter = PlayerCharacter;
 		IsActive = true;
-		
+
 		auto CameraManagerSubsystem = GetGameInstance()->GetSubsystem<UCameraManagerSubsystem>();
 		CameraManagerSubsystem->SetCurrentCameraVolume(this);
 	}
@@ -72,7 +72,7 @@ void ACameraVolume::OnEndOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
 	IsActive = false;
 	TankPlayerCharacter = nullptr;
-	
+
 	auto CameraManagerSubsystem = GetGameInstance()->GetSubsystem<UCameraManagerSubsystem>();
 	CameraManagerSubsystem->RemoveCameraVolume(this);
 }

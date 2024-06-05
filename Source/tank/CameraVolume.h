@@ -26,17 +26,15 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool FollowPlayer = false;
-	
-private:
 
+protected:
 	UPROPERTY()
 	bool IsActive = false;
 
 	UPROPERTY()
 	ATankPlayerCharacter* TankPlayerCharacter = nullptr;
-	
+
 public:
-	
 	ACameraVolume();
 
 protected:

@@ -19,6 +19,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USplineComponent* SplineComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool FollowPlayer = true;
+
 	ASplineCameraVolume();
 
 	virtual void BeginPlay() override;

@@ -30,7 +30,7 @@ void ACameraVolume::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	if (IsActive && FollowPlayer && TankPlayerCharacter)
+	if (IsActive && LookAtPlayer && TankPlayerCharacter)
 	{
 		TankPlayerCharacter->CameraComponent->SetWorldRotation(UKismetMathLibrary::FindLookAtRotation(
 			ArrowComponent->GetComponentTransform().GetLocation(), TankPlayerCharacter->GetTransform().GetLocation()));

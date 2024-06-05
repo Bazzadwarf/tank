@@ -25,7 +25,7 @@ public:
 	UCameraComponent* DebugCamera;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool FollowPlayer = false;
+	bool LookAtPlayer = false;
 
 protected:
 	UPROPERTY()

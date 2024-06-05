@@ -9,7 +9,6 @@ ASplineCameraVolume::ASplineCameraVolume()
 {
 	SplineComponent = CreateDefaultSubobject<USplineComponent>(TEXT("Spline Component"));
 	SplineComponent->SetupAttachment(RootComponent);
-	FollowPlayer = true;
 }
 
 void ASplineCameraVolume::BeginPlay()
@@ -25,7 +24,11 @@ void ASplineCameraVolume::Tick(float DeltaSeconds)
 			TankPlayerCharacter->GetTransform().GetLocation(), ESplineCoordinateSpace::World);
 
 		TankPlayerCharacter->CameraComponent->SetWorldLocation(Location);
+	}
+
+	if (IsActive && LookAtPlayer && TankPlayerCharacter)
+	{
 		TankPlayerCharacter->CameraComponent->SetWorldRotation(UKismetMathLibrary::FindLookAtRotation(
-			Location, TankPlayerCharacter->GetTransform().GetLocation()));
+			TankPlayerCharacter->GetTransform().GetLocation(), TankPlayerCharacter->GetTransform().GetLocation()));
 	}
 }

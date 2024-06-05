@@ -45,6 +45,15 @@ protected:
 public:
 	virtual void Tick(float DeltaSeconds) override;
 
+	UFUNCTION()
+	void MoveCameraToLocation();
+
+	UFUNCTION()
+	bool GetIsActive();
+
+	UFUNCTION()
+	void SetIsActive(bool bActive);
+
 private:
 	UFUNCTION()
 	void OnBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);

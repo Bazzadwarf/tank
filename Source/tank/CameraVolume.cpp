@@ -2,6 +2,8 @@
 
 
 #include "CameraVolume.h"
+
+#include "CameraManagerSubsystem.h"
 #include "TankPlayerCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
 
@@ -35,15 +37,34 @@ void ACameraVolume::Tick(float DeltaSeconds)
 	}
 }
 
+void ACameraVolume::MoveCameraToLocation()
+{
+	if (TankPlayerCharacter)
+	{
+		TankPlayerCharacter->CameraComponent->SetWorldLocation(ArrowComponent->GetComponentTransform().GetLocation());
+		TankPlayerCharacter->CameraComponent->SetWorldRotation(ArrowComponent->GetComponentTransform().GetRotation());
+	}
+}
+
+bool ACameraVolume::GetIsActive()
+{
+	return IsActive;
+}
+
+void ACameraVolume::SetIsActive(bool bActive)
+{
+	IsActive = bActive;
+}
+
 void ACameraVolume::OnBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
 	if (ATankPlayerCharacter* PlayerCharacter = Cast<ATankPlayerCharacter>(OtherActor))
 	{
-		PlayerCharacter->CameraComponent->SetWorldLocation(ArrowComponent->GetComponentTransform().GetLocation());
-		PlayerCharacter->CameraComponent->SetWorldRotation(ArrowComponent->GetComponentTransform().GetRotation());
-
 		TankPlayerCharacter = PlayerCharacter;
 		IsActive = true;
+		
+		auto CameraManagerSubsystem = GetGameInstance()->GetSubsystem<UCameraManagerSubsystem>();
+		CameraManagerSubsystem->SetCurrentCameraVolume(this);
 	}
 }
 
@@ -51,4 +72,7 @@ void ACameraVolume::OnEndOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
 	IsActive = false;
 	TankPlayerCharacter = nullptr;
+	
+	auto CameraManagerSubsystem = GetGameInstance()->GetSubsystem<UCameraManagerSubsystem>();
+	CameraManagerSubsystem->RemoveCameraVolume(this);
 }

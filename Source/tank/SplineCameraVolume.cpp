@@ -29,6 +29,6 @@ void ASplineCameraVolume::Tick(float DeltaSeconds)
 	if (IsActive && LookAtPlayer && TankPlayerCharacter)
 	{
 		TankPlayerCharacter->CameraComponent->SetWorldRotation(UKismetMathLibrary::FindLookAtRotation(
-			TankPlayerCharacter->GetTransform().GetLocation(), TankPlayerCharacter->GetTransform().GetLocation()));
+			TankPlayerCharacter->CameraComponent->GetComponentToWorld().GetLocation(), TankPlayerCharacter->GetTransform().GetLocation()));
 	}
 }

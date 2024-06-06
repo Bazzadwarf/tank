@@ -37,7 +37,7 @@ void UCameraManagerSubsystem::RemoveCameraVolume(ACameraVolume* CameraVolume)
 {
 	if (CameraVolume == CurrentCameraVolume)
 	{
-		CameraVolumeQueue.Remove(CameraVolume);
+		DequeueCameraVolume(CameraVolume);
 		CurrentCameraVolume->SetIsActive(false);
 		CurrentCameraVolume = nullptr;
 	}

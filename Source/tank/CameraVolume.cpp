@@ -24,6 +24,7 @@ void ACameraVolume::BeginPlay()
 	Super::BeginPlay();
 	this->OnActorBeginOverlap.AddDynamic(this, &ACameraVolume::OnBeginOverlap);
 	this->OnActorEndOverlap.AddDynamic(this, &ACameraVolume::OnEndOverlap);
+	DebugCamera->DestroyComponent();
 }
 
 void ACameraVolume::Tick(float DeltaSeconds)
